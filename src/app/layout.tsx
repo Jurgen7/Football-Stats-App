@@ -1,13 +1,16 @@
+'use client'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { Provider } from 'react-redux'
+import { store } from '@/store/store'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'Live Football Statistics',
-  description: 'Get your team results whenever you want',
-}
+// export const metadata: Metadata = {
+//   title: 'Live Football Statistics',
+//   description: 'Get your team results whenever you want',
+// }
 
 export default function RootLayout({
   children,
@@ -15,10 +18,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className= {`${inter.className} bg-slate-800 text-slate-100 container mx-auto p-4`}>
-        {children}
-      </body>
-    </html>
+    <Provider store={store}>
+      <html lang="en">
+        <body className= {`${inter.className} bg-slate-800 text-slate-100 container `}>
+          {children}
+        </body>
+      </html>
+    </Provider>
   )
 }
