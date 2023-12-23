@@ -1,24 +1,33 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { Navbar } from 'flowbite-react';
+import Link from 'next/link'
+import Image from 'next/image'
+import { Navbar } from 'flowbite-react'
 import Logo from '../../public/images/logo.png'
-import { useEffect } from 'react';
-import { fetchLeagueById } from '../api/fixturesAPI';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, store } from '../store/store';
-import { AppDispatch } from '../store/store';
+import { useEffect } from 'react'
+import { fetchLeagueById, fetchTopScorers } from '../api/fixturesAPI'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState, store } from '../store/store'
+import { AppDispatch } from '../store/store'
+import { Table } from 'flowbite-react'
 
 export default function Home() {
-  const dispatch: AppDispatch = useDispatch();
-  const leagueData = useSelector((state: RootState) => state.football.leagueData); 
+  const dispatch: AppDispatch = useDispatch()
+  const leagueData = useSelector((state: RootState) => state.football.leagueData)
+  const topScorersData = useSelector((state: RootState) => state.football.topScorersData)
 
   useEffect(() => {
-    dispatch(fetchLeagueById()); 
-  }, [dispatch]);
+    dispatch(fetchLeagueById())
+  }, [dispatch])
 
-  console.log(leagueData);
+  useEffect(() => {
+    dispatch(fetchTopScorers()) 
+  }, [dispatch])
+
+  console.log(leagueData)
+  console.log(topScorersData)
+
+  const scorers = topScorersData?.response
 
   return (
  
@@ -42,10 +51,30 @@ export default function Home() {
       </Navbar>
 
       <div>
-        <h1>Name :{leagueData?.response?.[0]?.league?.name}</h1>
-        <h1>Type: {leagueData?.response?.[0]?.league?.type}</h1>
+        <h1>This Season Goalscorers</h1>
+        <p>League: {leagueData?.response?.[0]?.league?.name} </p>
+      </div>
+
+      <div className="overflow-x-auto">
+        <Table hoverable>
+          <Table.Head>
+            <Table.HeadCell>Player</Table.HeadCell>
+            <Table.HeadCell>Goals</Table.HeadCell>
+          </Table.Head>
+          <Table.Body className="divide-y">
+
+            {Array.isArray(scorers) && scorers.map((scorer, index) => (
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {scorer.player.name}
+                </Table.Cell>
+                <Table.Cell>{scorer.statistics[0].goals.total}</Table.Cell>
+              </Table.Row>
+
+            ))}
+          </Table.Body>
+        </Table>
       </div>
     </div>
-
   )
 }
