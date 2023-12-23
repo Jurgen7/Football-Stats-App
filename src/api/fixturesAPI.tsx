@@ -1,14 +1,12 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
-
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
-const API_URL = 'https://api-football-v1.p.rapidapi.com/v3/leagues?id=39';
-const API_KEY = 'ccaf7c1fe6msh5aa3e83e5e5b132p14305djsnb398e7ccd0a1';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || ''
+const League_URL = 'https://api-football-v1.p.rapidapi.com/v3/leagues?id=39'
 
 export const fetchLeagueById = createAsyncThunk(
   'football/fetchLeagueById',
   async () => {
-    const response = await fetch(API_URL, {
+    const response = await fetch(League_URL, {
       method: 'GET',
       headers: {
         'x-rapidapi-key': API_KEY,
