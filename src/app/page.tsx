@@ -51,29 +51,94 @@ export default function Home() {
       </Navbar>
 
       <div>
-        <h1>This Season Goalscorers</h1>
+        <h1>Goalscorers Stats</h1>
         <p>League: {leagueData?.response?.[0]?.league?.name} </p>
       </div>
 
-      <div className="overflow-x-auto">
-        <Table hoverable>
-          <Table.Head>
-            <Table.HeadCell>Player</Table.HeadCell>
-            <Table.HeadCell>Goals</Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', width: '100%', height: '70vh' }}>
+        <div className="overflow-auto">
+          <Table hoverable>
+            <Table.Head>
+              <Table.HeadCell>Player</Table.HeadCell>
+              <Table.HeadCell>Appearences</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
 
-            {Array.isArray(scorers) && scorers.map((scorer, index) => (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {scorer.player.name}
-                </Table.Cell>
-                <Table.Cell>{scorer.statistics[0].goals.total}</Table.Cell>
-              </Table.Row>
+              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {scorer.player.name}
+                  </Table.Cell>
+                  <Table.Cell>{scorer.statistics[0].games.appearences}</Table.Cell>
+                </Table.Row>
 
-            ))}
-          </Table.Body>
-        </Table>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+
+        <div className="overflow-auto">
+          <Table hoverable>
+            <Table.Head>
+              <Table.HeadCell>Player</Table.HeadCell>
+              <Table.HeadCell>Shots</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+
+              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {scorer.player.name}
+                  </Table.Cell>
+                  <Table.Cell>{scorer.statistics[0].shots.total}</Table.Cell>
+                </Table.Row>
+
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+
+        <div className="overflow-auto">
+          <Table hoverable>
+            <Table.Head>
+              <Table.HeadCell>Player</Table.HeadCell>
+              <Table.HeadCell>Goals</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+
+              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {scorer.player.name}
+                  </Table.Cell>
+                  <Table.Cell>{scorer.statistics[0].goals.total}</Table.Cell>
+                </Table.Row>
+
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+
+        <div className="overflow-auto">
+          <Table hoverable>
+            <Table.Head>
+              <Table.HeadCell>Player</Table.HeadCell>
+              <Table.HeadCell>Penalties</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+
+              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {scorer.player.name}
+                  </Table.Cell>
+                  <Table.Cell>{scorer.statistics[0].penalty.scored}</Table.Cell>
+                </Table.Row>
+
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
       </div>
     </div>
   )
