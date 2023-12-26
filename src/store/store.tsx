@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import footballReducer from '../features/footballSlice';
+import playersReducer from '@/features/players/playersSlice';
+import teamsReducer from "@/features/teams/teamsSlice";
 
 export const store = configureStore({
     reducer: {
-        football: footballReducer, 
+        players: playersReducer, 
+        teams: teamsReducer 
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat()

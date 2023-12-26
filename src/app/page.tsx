@@ -1,58 +1,29 @@
 'use client'
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { Navbar } from 'flowbite-react'
-import Logo from '../../public/images/logo.png'
 import { useEffect } from 'react'
-import { fetchLeagueById, fetchTopScorers } from '../api/fixturesAPI'
+import { fetchTopScorers } from '@/api/playersEndpoints'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, store } from '../store/store'
-import { AppDispatch } from '../store/store'
+import { RootState, store } from '@/store/store'
+import { AppDispatch } from '@/store/store'
 import { Table } from 'flowbite-react'
 
 export default function Home() {
   const dispatch: AppDispatch = useDispatch()
-  const leagueData = useSelector((state: RootState) => state.football.leagueData)
-  const topScorersData = useSelector((state: RootState) => state.football.topScorersData)
-
-  useEffect(() => {
-    dispatch(fetchLeagueById())
-  }, [dispatch])
+  const topScorersData = useSelector((state: RootState) => state.players.topScorersData)
 
   useEffect(() => {
     dispatch(fetchTopScorers()) 
   }, [dispatch])
-
-  console.log(leagueData)
-  console.log(topScorersData)
 
   const scorers = topScorersData?.response
 
   return (
  
     <div>
-      <Navbar fluid >
-        <Navbar.Brand as={Link} href="">
-          <Image src={Logo} width={34} height={26} className="mr-3 h-6 sm:h-9" alt="Logo" />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white" style={{ color: '#111' }}>Football Hub</span>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Navbar.Link href="#" active>
-            Home
-          </Navbar.Link>
-          <Navbar.Link as={Link} href="#">
-            News
-          </Navbar.Link>
-          <Navbar.Link href="#">Live</Navbar.Link>
-          <Navbar.Link href="#">Standings</Navbar.Link>
-        </Navbar.Collapse>
-      </Navbar>
 
-      <div>
+      <div className='m-auto my-4 text-center'>
         <h1>Goalscorers Stats</h1>
-        <p>League: {leagueData?.response?.[0]?.league?.name} </p>
+        <p>Premier League</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', width: '100%', height: '70vh' }}>
