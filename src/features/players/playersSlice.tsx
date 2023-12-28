@@ -1,9 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchTopScorers } from '@/api/playersEndpoints'
 
+interface Player {
+    name: string
+    age: number
+}
+interface PlayerInfo {
+    player: Player, 
+    statistics: any
+}
 interface TopScorersState {
-    topScorersData: any; 
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    topScorersData: {response: PlayerInfo[]} 
+    status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | null;
 }
 
@@ -16,21 +24,19 @@ const initialState: TopScorersState = {
 export const playersSlice = createSlice({
     name: 'players',
     initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchTopScorers.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(fetchTopScorers.fulfilled, (state, action: PayloadAction<any>) => {
-                state.status = 'succeeded';
-                state.topScorersData = action.payload;
-            })
-            .addCase(fetchTopScorers.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Something went wrong';
-            });
+    reducers: {
+      fetchTopScorersRequest(state) {
+        state.status = 'loading';
+      },
+      fetchTopScorersSuccess(state, action: PayloadAction<any>) {
+        state.status = 'succeeded';
+        state.topScorersData = action.payload;
+      },
+      fetchTopScorersFailure(state, action: PayloadAction<string>) {
+        state.status = 'failed';
+        state.error = action.payload;
+      },
     },
-});
+  })
 
-export default playersSlice.reducer;
+  export default playersSlice.reducer

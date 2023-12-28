@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, store } from '@/store/store'
 import { AppDispatch } from '@/store/store'
 import { Table } from 'flowbite-react'
+import { playersSlice } from '@/features/players/playersSlice';
 
 export default function Home() {
   const dispatch: AppDispatch = useDispatch()
   const topScorersData = useSelector((state: RootState) => state.players.topScorersData)
 
   useEffect(() => {
-    dispatch(fetchTopScorers()) 
+    dispatch(playersSlice.actions.fetchTopScorersRequest()) 
   }, [dispatch])
 
-  const scorers = topScorersData?.response
-
+  
   return (
  
     <div>
@@ -35,7 +35,7 @@ export default function Home() {
             </Table.Head>
             <Table.Body className="divide-y">
 
-              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+              {topScorersData &&  topScorersData.response.map((scorer, index) => (
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {scorer.player.name}
@@ -56,7 +56,7 @@ export default function Home() {
             </Table.Head>
             <Table.Body className="divide-y">
 
-              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+              {topScorersData &&  topScorersData.response.map((scorer, index) => (
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {scorer.player.name}
@@ -77,7 +77,7 @@ export default function Home() {
             </Table.Head>
             <Table.Body className="divide-y">
 
-              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+              {topScorersData &&  topScorersData.response.map((scorer, index) => (
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {scorer.player.name}
@@ -98,7 +98,7 @@ export default function Home() {
             </Table.Head>
             <Table.Body className="divide-y">
 
-              {Array.isArray(scorers) && scorers.map((scorer, index) => (
+              {topScorersData &&  topScorersData.response.map((scorer, index) => (
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {scorer.player.name}
