@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchTopScorers } from '@/api/playersEndpoints'
 
 interface Player {
     name: string

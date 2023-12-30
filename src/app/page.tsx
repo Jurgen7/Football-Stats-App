@@ -16,7 +16,6 @@ export default function Home() {
     dispatch(playersSlice.actions.fetchTopScorersRequest()) 
   }, [dispatch])
 
-  
   return (
  
     <div>
@@ -35,15 +34,14 @@ export default function Home() {
             </Table.Head>
             <Table.Body className="divide-y">
 
-              {topScorersData &&  topScorersData.response.map((scorer, index) => (
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {scorer.player.name}
-                  </Table.Cell>
-                  <Table.Cell>{scorer.statistics[0].games.appearences}</Table.Cell>
-                </Table.Row>
-
-              ))}
+            {topScorersData && topScorersData.response.map((scorer, index) => (
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                <Table.Cell className="whitespace-nowrap cursor-pointer font-medium text-gray-900 dark:text-white">
+                  {scorer.player.name}
+                </Table.Cell>
+                <Table.Cell>{scorer.statistics[0].games.appearences}</Table.Cell>
+              </Table.Row>
+            ))}
             </Table.Body>
           </Table>
         </div>

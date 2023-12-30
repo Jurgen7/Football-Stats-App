@@ -26,7 +26,7 @@ const initialState: TeamsState = {
     teamsData: { response: [] },
     status: 'idle',
     error: null,
-};
+}
 
 export const teamsSlice = createSlice({
     name: 'teams',
