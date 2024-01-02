@@ -5,13 +5,14 @@ interface Team {
     id: number
     name: string
     founded: number
+    logo: string
 }
 interface Venue {
     id: number
     name: string
     capacity: number
 }
-interface TeamInfo {
+export interface TeamInfo {
     team: Team;
     venue: Venue;
 }
