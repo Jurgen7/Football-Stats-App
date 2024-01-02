@@ -4,8 +4,9 @@ interface Player {
     name: string
     age: number
     photo: string
+    nationality: string
 }
-interface PlayerInfo {
+export interface PlayerInfo {
     player: Player, 
     statistics: any
 }

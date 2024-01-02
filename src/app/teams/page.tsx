@@ -1,15 +1,13 @@
 'use client'
 import { fetchTeams, fetchTeamsStats } from "@/api/teamsEndpoints"
-import { teamsStatsSlice } from "@/features/teams/teamsStatsSlice"
 import { AppDispatch, RootState } from "@/store/store"
-import { Table } from "flowbite-react"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Sidebar } from 'flowbite-react';
+import { Sidebar } from 'flowbite-react'
 import Image from 'next/image'
 import { TeamInfo } from "@/features/teams/teamsSlice"
-import { Button, Modal } from 'flowbite-react';
-import { Accordion } from 'flowbite-react';
+import { Modal } from 'flowbite-react'
+import { Accordion } from 'flowbite-react'
 
 export default function Teams() {
     const dispatch: AppDispatch = useDispatch()
@@ -29,8 +27,8 @@ export default function Teams() {
     //     }
     // }, [dispatch, teamsData]);
 
-    const [selectedTeam, setSelectedTeam] = useState<TeamInfo | null>(null);
-    const [openModal, setOpenModal] = useState(false);
+    const [selectedTeam, setSelectedTeam] = useState<TeamInfo | null>(null)
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
