@@ -20,95 +20,38 @@ export default function Home() {
  
     <div>
 
-      <div className='m-auto my-4 text-center'>
+      <div className='m-auto mt-8 text-center'>
         <h1>Goalscorers Stats</h1>
         <p>Premier League</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', width: '100%', height: '70vh' }}>
-        <div className="overflow-auto">
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell>Player</Table.HeadCell>
-              <Table.HeadCell>Appearences</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-
-            {topScorersData && topScorersData.response.map((scorer, index) => (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                <Table.Cell className="whitespace-nowrap cursor-pointer font-medium text-gray-900 dark:text-white">
-                  {scorer.player.name}
-                </Table.Cell>
-                <Table.Cell>{scorer.statistics[0].games.appearences}</Table.Cell>
-              </Table.Row>
-            ))}
-            </Table.Body>
-          </Table>
+      <div className="overflow-auto p-8">
+            <Table hoverable>
+                <Table.Head>
+                    <Table.HeadCell>Player</Table.HeadCell>
+                    <Table.HeadCell>Appearances</Table.HeadCell>
+                    <Table.HeadCell>Shots</Table.HeadCell>
+                    <Table.HeadCell>Goals</Table.HeadCell>
+                    <Table.HeadCell>Penalties</Table.HeadCell>
+                </Table.Head>
+                <Table.Body className="divide-y">
+                    {topScorersData && topScorersData.response.map((scorer, index) => (
+                        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
+                            <Table.Cell className="whitespace-nowrap cursor-pointer font-medium text-gray-900 dark:text-white">
+                            <div className="flex gap-4 items-center">
+                                        <img src={scorer.player.photo} width={32}  alt="player-picture"></img>
+                                        <span>{scorer.player.name}</span>
+                                    </div>
+                            </Table.Cell>
+                            <Table.Cell>{scorer.statistics[0].games.appearences}</Table.Cell>
+                            <Table.Cell>{scorer.statistics[0].shots.total}</Table.Cell>
+                            <Table.Cell>{scorer.statistics[0].goals.total}</Table.Cell>
+                            <Table.Cell>{scorer.statistics[0].penalty.scored}</Table.Cell>
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table>
         </div>
-
-        <div className="overflow-auto">
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell>Player</Table.HeadCell>
-              <Table.HeadCell>Shots</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-
-              {topScorersData &&  topScorersData.response.map((scorer, index) => (
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {scorer.player.name}
-                  </Table.Cell>
-                  <Table.Cell>{scorer.statistics[0].shots.total}</Table.Cell>
-                </Table.Row>
-
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-
-        <div className="overflow-auto">
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell>Player</Table.HeadCell>
-              <Table.HeadCell>Goals</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-
-              {topScorersData &&  topScorersData.response.map((scorer, index) => (
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {scorer.player.name}
-                  </Table.Cell>
-                  <Table.Cell>{scorer.statistics[0].goals.total}</Table.Cell>
-                </Table.Row>
-
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-
-        <div className="overflow-auto">
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell>Player</Table.HeadCell>
-              <Table.HeadCell>Penalties</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-
-              {topScorersData &&  topScorersData.response.map((scorer, index) => (
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={index}>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {scorer.player.name}
-                  </Table.Cell>
-                  <Table.Cell>{scorer.statistics[0].penalty.scored}</Table.Cell>
-                </Table.Row>
-
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-      </div>
     </div>
   )
 }

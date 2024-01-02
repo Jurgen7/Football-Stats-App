@@ -51,7 +51,7 @@ export default function Teams() {
                                         setOpenModal(true);
                                     }}
                                 >
-                                    <div className="flex gap-4 align-middle">
+                                    <div className="flex gap-4 items-center">
                                         <img src={teamInfo.team.logo} width={32}  alt="team-logo"></img>
                                         <span>{teamInfo.team.name}</span>
                                     </div>
