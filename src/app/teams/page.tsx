@@ -50,7 +50,14 @@ export default function Teams() {
                                     }}
                                 >
                                     <div className="flex gap-4 items-center">
-                                        <img src={teamInfo.team.logo} width={32}  alt="team-logo"></img>
+                                        <Image 
+                                            src={teamInfo.team.logo} 
+                                            width={0} 
+                                            height={0} 
+                                            style={{ width: '32px' }} 
+                                            sizes="100vw" 
+                                            alt="team-logo" 
+                                        />
                                         <span>{teamInfo.team.name}</span>
                                     </div>
                                 </Sidebar.Item>
@@ -115,7 +122,14 @@ export default function Teams() {
                     <div className="space-y-6">
                         {selectedTeam && (
                             <>
-                                <img src={selectedTeam.team.logo} width={38} alt={`${selectedTeam.team.name} logo`} />
+                                <Image 
+                                    src={selectedTeam.team.logo} 
+                                    width={0} 
+                                    height={0} 
+                                    style={{ width: '38px' }} 
+                                    sizes="100vw"  
+                                    alt={`${selectedTeam.team.name} logo`} 
+                                />
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                     Founded: {selectedTeam.team.founded}
                                 </p>

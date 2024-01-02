@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            { hostname: 'media.api-sports.io' },
+        ],
+    },
+}
 
-module.exports = nextConfig
+module.exports = nextConfig;
