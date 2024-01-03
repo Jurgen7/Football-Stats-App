@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { TeamInfo } from "@/features/teams/teamsSlice"
 import { Modal } from 'flowbite-react'
 import { Accordion } from 'flowbite-react'
+import { Stats } from "@/features/teams/teamsStatsSlice"
 
 export default function Teams() {
     const dispatch: AppDispatch = useDispatch()
@@ -31,7 +32,17 @@ export default function Teams() {
     }, [dispatch, teamsData, teamsStatsData]);
 
     const [selectedTeam, setSelectedTeam] = useState<TeamInfo | null>(null)
+    const [selectedTeamStats, setSelectedTeamStats] = useState<Stats | null>(null)
     const [openModal, setOpenModal] = useState(false)
+
+    const handleTeamSelect = (teamInfo: TeamInfo) => {
+        const teamStats = teamsStatsData.find(
+            stats => stats.response.team?.id === teamInfo.team.id
+        )
+        setSelectedTeam(teamInfo)
+        setSelectedTeamStats(teamStats || null )
+        setOpenModal(true)
+    };
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
@@ -47,10 +58,7 @@ export default function Teams() {
                                 <Sidebar.Item 
                                     href="#" 
                                     key={index}
-                                    onClick={() => {
-                                        setSelectedTeam(teamInfo);
-                                        setOpenModal(true);
-                                    }}
+                                    onClick={() => handleTeamSelect(teamInfo)}
                                 >
                                     <div className="flex gap-4 items-center">
                                         <Image 
@@ -107,9 +115,8 @@ export default function Teams() {
                                 respectively. In the second-tier UEFA Europa League, English clubs are also second, with nine 
                                 victories and eight losses in the finals.
                             </p>
-                            <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                To view detailed informations about the teams you can check every single team in the sidebar by 
-                                clicking at the name.
+                            <p className="mb-2 text-white">
+                                To learn more information and statistics about each team click on the team you want on the sidebar!
                             </p>
                             </Accordion.Content>
                         </Accordion.Panel>
@@ -142,22 +149,26 @@ export default function Teams() {
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                     Capacity: {selectedTeam.venue.capacity}
                                 </p>
+                                {selectedTeamStats && (
+                                    <>
+                                        <h3 className='text-gray-900 text-xl border-b pb-5 font-medium'>2023 Stats</h3>
+                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                            Total Goals: {selectedTeamStats.response.goals?.for.total.total}
+                                        </p>
+                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                            Home Goals: {selectedTeamStats.response.goals?.for.total.home}
+                                        </p>
+                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                            Away Goals: {selectedTeamStats.response.goals?.for.total.away}
+                                        </p>
+                                    </>
+                                )}
                             </>
                         )}
+
                     </div>
                 </Modal.Body>
             </Modal>
-
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {teamsStatsData.map((stats, index) => (
-                    <div key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{stats.response.team?.name}</span>
-                        <span>{stats.response.goals?.for.total.total}</span>
-                        <span>{stats.response.goals?.for.total.home}</span>
-                        <span>{stats.response.goals?.for.total.away}</span>
-                    </div>                  
-                ))}
-            </div>
         </div>
     )
 }

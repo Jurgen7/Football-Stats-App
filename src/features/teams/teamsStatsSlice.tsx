@@ -1,7 +1,7 @@
 import { fetchTeamsStats } from '@/api/teamsEndpoints';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface Stats {
+export interface Stats {
     response: {
         team: TeamInfo
         goals: Goals
