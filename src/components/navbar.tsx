@@ -12,7 +12,7 @@ export default function PageNavbar() {
         <div>
             <Navbar fluid >
                 <Navbar.Brand as={Link} href="">
-                    <Image src={Logo} width={34} className="mr-3 h-6 sm:h-9" alt="Logo" />
+                    <Image src={Logo} width={34} style={{ height: 'auto' }} className="mr-3 h-6 sm:h-9" alt="Logo" />
                     <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white" style={{ color: '#111' }}>
                         Premier Stats
                     </span>

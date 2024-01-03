@@ -20,12 +20,12 @@ export default function RootLayout({
       <html lang="en">
         <head>
           <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-          <title>Football Hub</title>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js" defer></script>
+          <title>Premier Stats</title>
         </head>
         <body className={`${inter.className} bg-slate-800 text-slate-100 container `}>
           <PageNavbar />
           {children}
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
         </body>
       </html>
     </Provider>
