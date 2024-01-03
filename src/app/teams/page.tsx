@@ -18,14 +18,17 @@ export default function Teams() {
         dispatch(fetchTeams());
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     if (teamsData && teamsData.response) {
-    //         const firstTwoTeams = teamsData.response.slice(0, 2);
-    //         firstTwoTeams.forEach(team => {
-    //             dispatch(fetchTeamsStats(team.team.id));
-    //         });
-    //     }
-    // }, [dispatch, teamsData]);
+    useEffect(() => {
+        if (teamsData && teamsData.response) {
+            const firstTwoTeams = teamsData.response.slice(0, 2);
+            firstTwoTeams.forEach(team => {
+    
+                if (!teamsStatsData.some(stats => stats.response.team?.id === team.team.id)) {
+                    dispatch(fetchTeamsStats(team.team.id));
+                }
+            });
+        }
+    }, [dispatch, teamsData, teamsStatsData]);
 
     const [selectedTeam, setSelectedTeam] = useState<TeamInfo | null>(null)
     const [openModal, setOpenModal] = useState(false)
@@ -145,7 +148,7 @@ export default function Teams() {
                 </Modal.Body>
             </Modal>
 
-            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {teamsStatsData.map((stats, index) => (
                     <div key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span>{stats.response.team?.name}</span>
@@ -154,7 +157,7 @@ export default function Teams() {
                         <span>{stats.response.goals?.for.total.away}</span>
                     </div>                  
                 ))}
-            </div> */}
+            </div>
         </div>
     )
 }

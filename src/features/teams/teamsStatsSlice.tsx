@@ -10,6 +10,7 @@ interface Stats {
 
 interface TeamInfo {
     name: string
+    id: number
 }
 
 interface Goals {
@@ -50,7 +51,14 @@ export const teamsStatsSlice = createSlice({
             })
             .addCase(fetchTeamsStats.fulfilled, (state, action: PayloadAction<Stats>) => {
                 state.status = 'succeeded';
-                state.teamsStatsData.push(action.payload); 
+                const existingIndex = state.teamsStatsData.findIndex(
+                    stats => stats.response.team.id === action.payload.response.team.id
+                )
+                if (existingIndex !== -1) {
+                    state.teamsStatsData[existingIndex] = action.payload;
+                } else {
+                    state.teamsStatsData.push(action.payload) 
+                }
             })
             .addCase(fetchTeamsStats.rejected, (state, action) => {
                 state.status = 'failed';
