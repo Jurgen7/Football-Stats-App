@@ -1,14 +1,42 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 interface Player {
     name: string
     age: number
     photo: string
     nationality: string
 }
+
+interface Statistics {
+  games: Games,
+  shots: Shots,
+  goals: Goals,
+  penalty: Penalty
+  team: PlayerTeam
+}
+
+interface Games {
+  appearences: number
+}
+
+interface Shots {
+  total: number
+}
+
+interface Goals {
+  total: number
+}
+
+interface Penalty {
+  scored: number
+}
+
+interface PlayerTeam {
+  name: string
+  logo: string
+}
 export interface PlayerInfo {
     player: Player, 
-    statistics: any
+    statistics: Statistics[]
 }
 interface TopScorersState {
     topScorersData: {response: PlayerInfo[]} 
@@ -20,7 +48,7 @@ const initialState: TopScorersState = {
     topScorersData: { response: [] },
     status: 'idle',
     error: null,
-};
+}
 
 export const playersSlice = createSlice({
     name: 'players',

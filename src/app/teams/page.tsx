@@ -48,7 +48,7 @@ export default function Teams() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             <div className="mt-4 text-center">
                 <h1 className="text-2xl">Premier League Teams</h1>
-                <p>General Information about the Clubs</p>
+                <p>General information about the Clubs</p>
             </div>
             <div className="flex gap-12 px-12 box-border">
                 <Sidebar aria-label="Default sidebar example" style={{ width: '20%', height: '70vh' }}>

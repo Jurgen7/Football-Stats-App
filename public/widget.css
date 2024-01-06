@@ -2,9 +2,9 @@
   --font: "Raleway", sans-serif;
 
   --background-color: #fff;
-  --background-color-header: #e9ecef;
+  --background-color-header: #374151;
   --color-text: #000;
-  --color-text-header: #000;
+  --color-text-header: #fff;
   --color-green: #01d099;
   --color-red: #f64e60;
   --color-yellow: #ffa800;
@@ -52,11 +52,17 @@
   --teams-logo-block-background-modal: var(--background-color-header);
 }
 
+.header {
+  font-family: var(--font);
+  color: var(--color-text-header);
+  margin-bottom: 2.5rem;
+}
+
 .wg-table {
   font-family: var(--font);
   width: 100%;
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 td {
@@ -106,7 +112,8 @@ td>span {
 }
 
 .wg_header {
-  padding: var(--secondary-padding);
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
   font-size: var(--header-font-size);
   font-weight: 600;
   background: var(--background-color-header);
